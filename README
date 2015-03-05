@@ -1,0 +1,30 @@
+BasicSPH
+
+1. Description
+--------------
+This project contains a basic SPH fluid simulator written with ease of
+understanding in mind. Simplicity and clearness of the code has been favored
+over speed and flexibility in order to make it a good starting point for someone
+ who wants to learn the basics of an SPH fluid simulator.
+
+The implementation is based on the papers "Weakly compressible SPH for free
+surface flows" (Becker and Teschner 2007) and "Smoothed Particle Hydrodynamics"
+(Monaghan 1992). 
+
+2. Build project
+----------------
+To build the project, either use CMake to generate the project files or create
+a new project from scratch (using your favorite IDE) and include all the source
+files.
+
+3. Running the simulation
+-------------------------
+The generated executable takes an output directory as its only argument. For 
+example, the following command will run the simulation and output its result in
+the  "TestOutput" directory:
+
+$ ./BasicSPH TestOutput
+
+The particles are outputed in the .geo format that can be read using the
+Houdini Software (a free version is available at http://sidefx.com). There is
+no other format supported for now.
