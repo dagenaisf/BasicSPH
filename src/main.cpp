@@ -85,7 +85,7 @@ int main(int argc, char* argv[])
     std::cout << "Initializing simulator..." << std::endl;
     const Vec3d volumeMin(-3,   0, -1);
     const Vec3d volumeMax( 3,   3,  1);
-    const double mass = 1.5;
+    const double mass = 1.0;
     const double restDensity = 998.23;
     const double h = 0.2;
     const double k = 100.0;

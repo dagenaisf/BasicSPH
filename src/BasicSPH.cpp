@@ -159,7 +159,7 @@ void BasicSPH::buildNeighbors()
         grid.getElements(particle.pos, _h, nearbyParticles);
 
         // Find particles that are within smoothing radius
-        _neighbors[p].reserve(30);
+        _neighbors[p].reserve(50);
         for (long i=0; i<nearbyParticles.size(); ++i)
         {
             long nID = *nearbyParticles[i];
@@ -201,6 +201,9 @@ void BasicSPH::computeDensityAndPressure()
         particle.accel = Vec3d(0,0,0);
         particle.pressure = 0.0;
         particle.oneOverDensity = 0.0;
+
+        // Add current particle's contribution
+        particle.density = _mass * getKernelValue(0.0);
 
         // Compute density from neighbors contributions
         // rho_i = SUM_j (m_j * Wij)
@@ -252,6 +255,8 @@ void BasicSPH::computeArtificialViscosityForces()
     {
         SPHParticle &particle = _particles[p];
 
+        // No need to compute current particle's contribution, since its gradient is null!
+
         // Get neighbors contributions
         for (long n=0; n<_neighbors[p].size(); ++n)
         {
@@ -300,6 +305,8 @@ void BasicSPH::computePressureForces()
     for (long p=0; p<_particles.size(); ++p)
     {
         SPHParticle &particle = _particles[p];
+
+        // No need to compute current particle's contribution, since its gradient is null!
 
         // Get neighbors contributions
         // fp_i/rho_i = -SUM_j (m_j * (pi/rho_i^2 + pj/rho_j^2) * gradient(Wij)
