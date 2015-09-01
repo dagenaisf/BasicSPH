@@ -430,7 +430,7 @@ void BasicSPH::precomputeKernelCoefficients()
     _kernelValueCoeff = 1.0 / (4.0*PI*pow(_halfH,3));
 
     // Precompute gradient coefficients
-    _kernelGradientCoeffA = 3.0 / (4.0*PI*pow(_halfH,5));
+    _kernelGradientCoeffA = 3.0 / (4.0*PI*pow(_halfH,4));
     _kernelGradientCoeffB = -3.0 / (4.0*PI*pow(_halfH,4));
 
     // Precompute laplacian coefficients
@@ -462,13 +462,17 @@ Vec3d BasicSPH::getKernelGradient(double dist, const Vec3d& xij) const
 {
     double q = dist/_halfH;
     Vec3d gradient = xij;
-    if (q<=1.0)
+    if (q<= 0.0)
     {
-        gradient *= _kernelGradientCoeffA * (3*q-4);
+        gradient = Vec3d(0,0,0);
+    }
+    else if (q<1.0)
+    {
+        gradient *= _kernelGradientCoeffA * (4.0 * pow2(1.0-q) - pow2(2.0-q)) / dist;
     }
     else
     {
-        gradient *= (_kernelGradientCoeffB * pow2(q-2.0)) / dist;
+        gradient *= (_kernelGradientCoeffB * pow2(2.0 - q)) / dist;
     }
 
     return gradient;
