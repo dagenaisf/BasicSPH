@@ -54,9 +54,9 @@ void SpatialGrid<T>::initGrid(double cellSize, const Vec3d& volumeMin, const Vec
 	}
 
 	// Compute number of cell on each axis
-	_resX = static_cast<int>(ceil((volumeMax.x-volumeMin.x)/cellSize));
-	_resY = static_cast<int>(ceil((volumeMax.y-volumeMin.y)/cellSize));
-	_resZ = static_cast<int>(ceil((volumeMax.z-volumeMin.z)/cellSize));
+    _resX = static_cast<int>(ceil((volumeMax.x-volumeMin.x)/cellSize)) + 1;
+    _resY = static_cast<int>(ceil((volumeMax.y-volumeMin.y)/cellSize)) + 1;
+    _resZ = static_cast<int>(ceil((volumeMax.z-volumeMin.z)/cellSize)) + 1;
 
 	// Compute grid dimensions
 	_cellSize = cellSize;
