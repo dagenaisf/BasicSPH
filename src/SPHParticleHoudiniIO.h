@@ -26,7 +26,7 @@
 #include <vector>
 #include <string>
 
-class SPHParticle;
+struct SPHParticle;
 
 namespace SPHParticleHoudiniIO
 {
